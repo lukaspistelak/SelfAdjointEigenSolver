@@ -405,11 +405,11 @@ SelfAdjointEigenSolver<MatrixType>& SelfAdjointEigenSolver<MatrixType>
 
 	  RealVectorType approx=RealVectorType::Random(n);
 	  int counter = 0;
-	  double error=100;
+	  double perror=100;
 	  double largestEvalue=0;
 
 
-	  while (counter < 100 && error > 10e-5  ){
+	  while (counter < 100 && perror > 10e-5  ){
 
 		  RealVectorType temppower = approx;
 		 // approxpwr.setZero(nofph);
@@ -417,12 +417,12 @@ SelfAdjointEigenSolver<MatrixType>& SelfAdjointEigenSolver<MatrixType>
 		  approx = (Itermatrix*temppower);//CAN BE BUGGY? HEAP OVERFOLW! soetimes
 		  approx.normalize();
 
-		  error = (temppower-approx).stableNorm();
+		  perror = (temppower-approx).stableNorm();
 		  counter++;
 
 	  }
-	  LOGD( "This is a counter from  JNI: %d", counter );
-	  LOGD( "This is a error from  JNI: %f", error );
+	 // LOGD( "This is a counter from  JNI: %d", counter );
+	 // LOGD( "This is a perror from  JNI: %f", perror );
 
 	  largestEvalue=approx.transpose()*Itermatrix*approx;
 
